@@ -14,7 +14,7 @@ from tornado.ioloop import IOLoop
 
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 
-def logger_setup(name, file_name, level=os.environ['log_level']):
+def logger_setup(name, file_name, level=os.environ['LOG_LEVEL']):
     """Setup different loggers here"""
 
     file_handler = logging.FileHandler(file_name)
@@ -25,7 +25,7 @@ def logger_setup(name, file_name, level=os.environ['log_level']):
 
     return logger
 
-general_log = logger_setup(os.environ['logger_name'],os.environ['log_path_general'])
+general_log = logger_setup(os.environ['LOGGER_NAME'],os.environ['LOG_PATH_GENERAL'])
 time_log = logger_setup(' Timing Main Manager  ','/logs/mmtime.log')
 
 #############################################################################################
@@ -44,7 +44,7 @@ class Car_ApiServer(RequestHandler):
     def post(self, id):
         """Handles the behaviour of POST calls from the car"""
         received_post = time.time() 
-        config = open('local_manager_config.json')
+        config = open(os.environ['LM_CONFIG_JSON'])
         body = json.load(config)
         for k in body["MECs"]:
             if json.loads(self.request.body)["location"] in k["coverage_area"]:
@@ -124,8 +124,8 @@ def post_local_mgr_config():
     body = json.load(config)
     http_client = tornado.httpclient.HTTPClient()
     try:
-        response_1 = http_client.fetch(os.environ['local_manager_post_address_one'],method='POST',body=json.dumps(body["MECs"][0]))
-        response_2 = http_client.fetch(os.environ['local_manager_post_address_two'],method='POST',body=json.dumps(body["MECs"][1]))        
+        response_1 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_ONE'],method='POST',body=json.dumps(body["MECs"][0]))
+        response_2 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_TWO'],method='POST',body=json.dumps(body["MECs"][1]))        
     except Exception as e:
         general_log.debug("Errorasdasd: %s" % e)
     else:
@@ -152,7 +152,7 @@ def car_registration():# NOT USED
 if __name__ == '__main__':
 
   app = make_app()
-  app.listen(os.environ['api_port'])
+  app.listen(os.environ['API_PORT'])
   post_local_mgr_config()
   print("Started Main Manager REST Server")
   IOLoop.instance().start()
