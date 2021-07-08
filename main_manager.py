@@ -1,3 +1,4 @@
+import os
 import json
 import time
 import urllib
@@ -13,7 +14,7 @@ from tornado.ioloop import IOLoop
 
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 
-def logger_setup(name, file_name, level=logging.DEBUG):
+def logger_setup(name, file_name, level=os.environ['log_level']):
     """Setup different loggers here"""
 
     file_handler = logging.FileHandler(file_name)
@@ -24,7 +25,7 @@ def logger_setup(name, file_name, level=logging.DEBUG):
 
     return logger
 
-general_log = logger_setup(' Main Manager ','/logs/mm.log')
+general_log = logger_setup(os.environ['logger_name'],os.environ['log_path_general'])
 time_log = logger_setup(' Timing Main Manager  ','/logs/mmtime.log')
 
 #############################################################################################
@@ -123,8 +124,8 @@ def post_local_mgr_config():
     body = json.load(config)
     http_client = tornado.httpclient.HTTPClient()
     try:
-        response_1 = http_client.fetch("http://local-manager-1-service.clm-test.empower:3500/api/item/from_main_mgr_config_api/1",method='POST',body=json.dumps(body["MECs"][0]))
-        response_2 = http_client.fetch("http://local-manager-2-service.clm-test.empower:3501/api/item/from_main_mgr_config_api/1",method='POST',body=json.dumps(body["MECs"][1]))        
+        response_1 = http_client.fetch(os.environ['local_manager_post_address_one'],method='POST',body=json.dumps(body["MECs"][0]))
+        response_2 = http_client.fetch(os.environ['local_manager_post_address_two'],method='POST',body=json.dumps(body["MECs"][1]))        
     except Exception as e:
         general_log.debug("Errorasdasd: %s" % e)
     else:
@@ -151,7 +152,7 @@ def car_registration():# NOT USED
 if __name__ == '__main__':
 
   app = make_app()
-  app.listen(4000)
+  app.listen(os.environ['api_port'])
   post_local_mgr_config()
   print("Started Main Manager REST Server")
   IOLoop.instance().start()
