@@ -10,30 +10,30 @@
 			 "B2",
 			 "B3"
 		  ],
-		  "AMQP_Addr":"message-broker-1-service.clm-test.empower:5672",
+		  "AMQP_Addr":"message-broker-1-service:5672",
 		  "transition_areas":[
 			 {
 				"from":"A2",
 				"to":"A3",
-				"Address":"message-broker-2-service.clm-test.empower:5672",
+				"Address":"message-broker-2-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"A2",
 				"to":"B3",
-				"Address":"message-broker-2-service.clm-test.empower:5672",
+				"Address":"message-broker-2-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"B2",
 				"to":"A3",
-				"Address":"message-broker-2-service.clm-test.empower:5672",
+				"Address":"message-broker-2-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"B2",
 				"to":"B3",
-				"Address":"message-broker-2-service.clm-test.empower:5672",
+				"Address":"message-broker-2-service:5672",
 				"type":"Message_Broker"
 			 }
 		  ]
@@ -48,54 +48,54 @@
 			 "B5",
 			 "B6"
 		  ],
-		  "AMQP_Addr":"message-broker-2-service.clm-test.empower:5672",
+		  "AMQP_Addr":"message-broker-2-service:5672",
 		  "transition_areas":[
 			 {
 				"from":"A5",
 				"to":"A6",
-				"Address":"message-broker-3-service.clm-test.empower:5672",
+				"Address":"message-broker-3-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"B5",
 				"to":"B6",
-				"Address":"message-broker-3-service.clm-test.empower:5672",
+				"Address":"message-broker-3-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"B5",
 				"to":"A6",
-				"Address":"message-broker-3-service.clm-test.empower:5672",
+				"Address":"message-broker-3-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"A5",
 				"to":"B6",
-				"Address":"message-broker-3-service.clm-test.empower:5672",
+				"Address":"message-broker-3-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"A5",
 				"to":"A4",
-				"Address":"message-broker-1-service.clm-test.empower:5672",
+				"Address":"message-broker-1-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"B5",
 				"to":"B4",
-				"Address":"message-broker-1-service.clm-test.empower:5672",
+				"Address":"message-broker-1-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"B5",
 				"to":"A4",
-				"Address":"message-broker-1-service.clm-test.empower:5672",
+				"Address":"message-broker-1-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"A5",
 				"to":"B4",
-				"Address":"message-broker-1-service.clm-test.empower:5672",
+				"Address":"message-broker-1-service:5672",
 				"type":"Message_Broker"
 			 }
 		  ]
@@ -110,30 +110,30 @@
 			 "B8",
 			 "B9"
 		  ],
-		  "AMQP_Addr":"message-broker-3-service.clm-test.empower:5672",
+		  "AMQP_Addr":"message-broker-3-service:5672",
 		  "transition_areas":[
 			 {
 				"from":"A8",
 				"to":"A7",
-				"Address":"message-broker-2-service.clm-test.empower:5672",
+				"Address":"message-broker-2-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"A8",
 				"to":"B7",
-				"Address":"message-broker-2-service.clm-test.empower:5672",
+				"Address":"message-broker-2-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"B8",
 				"to":"A7",
-				"Address":"message-broker-2-service.clm-test.empower:5672",
+				"Address":"message-broker-2-service:5672",
 				"type":"Message_Broker"
 			 },
 			 {
 				"from":"B8",
 				"to":"B7",
-				"Address":"message-broker-2-service.clm-test.empower:5672",
+				"Address":"message-broker-2-service:5672",
 				"type":"Message_Broker"
 			 }
 		  ]
