@@ -10,7 +10,7 @@
 			 "B2",
 			 "B3"
 		  ],
-		  "AMQP_Addr":"message-broker-1-service.cpu-mem-test.empower:5672",
+		  "AMQP_Addr":"163.162.42.24:5672",
 		  "transition_areas":[
 			 {
 				"from":"A2",
