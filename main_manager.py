@@ -123,13 +123,16 @@ def post_local_mgr_config():
     config = open('local_manager_config.json')
     body = json.load(config)
     http_client = tornado.httpclient.HTTPClient()
-    try:
+    while True:
+      try:
         response_1 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_ONE'],method='POST',body=json.dumps(body["MECs"][0]))
         #response_2 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_TWO'],method='POST',body=json.dumps(body["MECs"][1]))        
-    except Exception as e:
+      except Exception as e:
         general_log.debug("Errorasdasd: %s" % e)
-    else:
+        time.sleep(5)
+      else:
         general_log.debug(response_1.body)
+        break
         #general_log.debug(response_2.body)
 
 def car_registration():# NOT USED

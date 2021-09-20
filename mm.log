@@ -1,0 +1,24 @@
+2021-09-20 17:40:12,214 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:40:17,220 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:40:22,228 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:40:27,236 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:40:32,244 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:40:37,251 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:40:42,260 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:40:47,268 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:40:52,278 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:40:57,282 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:41:02,291 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:41:07,311 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:41:12,326 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:41:17,343 DEBUG Errorasdasd: [Errno 104] Connection reset by peer
+2021-09-20 17:41:46,956 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:41:51,975 DEBUG b'{"local_manager_id": "local_manager_1", "coverage_area": ["A1", "A2", "A3", "B1", "B2", "B3"], "AMQP_Addr": "163.162.42.24:5672", "transition_areas": [{"from": "A2", "to": "A3", "Address": "message-broker-2-service.cpu-mem-test.empower:5672", "type": "Message_Broker"}, {"from": "A2", "to": "B3", "Address": "message-broker-2-service.cpu-mem-test.empower:5672", "type": "Message_Broker"}, {"from": "B2", "to": "A3", "Address": "message-broker-2-service.cpu-mem-test.empower:5672", "type": "Message_Broker"}, {"from": "B2", "to": "B3", "Address": "message-broker-2-service.cpu-mem-test.empower:5672", "type": "Message_Broker"}]}'
+2021-09-20 17:42:19,312 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:42:24,321 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:42:29,330 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:42:34,336 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:42:39,345 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:42:44,354 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:42:49,358 DEBUG Errorasdasd: [Errno 111] Connection refused
+2021-09-20 17:42:54,372 DEBUG b'{"local_manager_id": "local_manager_1", "coverage_area": ["A1", "A2", "A3", "B1", "B2", "B3"], "AMQP_Addr": "163.162.42.24:5672", "transition_areas": [{"from": "A2", "to": "A3", "Address": "message-broker-2-service.cpu-mem-test.empower:5672", "type": "Message_Broker"}, {"from": "A2", "to": "B3", "Address": "message-broker-2-service.cpu-mem-test.empower:5672", "type": "Message_Broker"}, {"from": "B2", "to": "A3", "Address": "message-broker-2-service.cpu-mem-test.empower:5672", "type": "Message_Broker"}, {"from": "B2", "to": "B3", "Address": "message-broker-2-service.cpu-mem-test.empower:5672", "type": "Message_Broker"}]}'
