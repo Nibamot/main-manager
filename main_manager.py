@@ -49,6 +49,28 @@ time_log = logger_setup(' Timing Main Manager  ')
 
 
 
+############TENTATIVE DICTS from MM Config###################
+
+sm_dict={}
+qtcode_dict={}
+
+def config_startup():
+    """ Main Manager startup config handling"""
+    config = open(os.environ['LM_CONFIG_JSON'])#'support_message_config.json',encoding="utf8"
+    body = json.load(config)
+    
+    for key,value in body["lms"].items(): 
+        for lc in value["local_config"]:
+            for qt in lc["qtcode_list"]:
+                qtcode_dict.update({qt:lc["message"].get("id")})
+                sm_dict.update({lc["message"].get("id"):lc["message"].get("endpoints")})
+    
+    return sm_dict, qtcode_dict
+
+############TENTATIVE DICTS from MM Config###################
+
+
+
 #############################################################################################
 ################################ API Server #################################
 #############################################################################################
@@ -57,14 +79,31 @@ class Car_ApiServer(RequestHandler):
     """ API SERVER for handling calls from the cars """
     def post(self, id):
         """Handles the behaviour of POST calls from the car"""
-        received_post = time.time() 
-        config = open(os.environ['LM_CONFIG_JSON'])
-        body = json.load(config)
-        for k in body["MECs"]:
-            if json.loads(self.request.body)["location"] in k["coverage_area"]:
-                self.write({'AMQP_Addr':k["AMQP_Addr"]})
-                sent_reply = time.time() 
-                general_log.debug((sent_reply-received_post)*1000)
+        received_post = time.time()
+        sm_dict,qtcode_dict=config_startup()
+        car_position = json.loads(self.request.body)["location"]
+        if car_position in qtcode_dict.keys():
+            for sm in sm_dict[qtcode_dict.get((car_position))]:
+                self.write(sm)
+                sent_reply = time.time()
+                general_log.debug(str((sent_reply-received_post)*1000)+" ms")
+    
+    def get(self,id):
+        """ GET calls handler"""
+        received_post = time.time()
+        sm_dict,qtcode_dict=config_startup()
+        car_position = self.request.uri.replace("/api/item/from_car_api/qtcode/","")
+        if car_position in qtcode_dict.keys():
+            for sm in sm_dict[qtcode_dict.get((car_position))]:
+                self.set_status(200)
+                self.set_header("Content-Type", 'application/json')
+                self.write(sm)
+                sent_reply = time.time()
+                general_log.debug(str((sent_reply-received_post)*1000)+" ms")
+        else:
+            self.set_status(400)
+            self.set_header("Content-Type", 'application/json')
+            self.write("Not within my scope")
   
     def put(self, id):
         """Handles the behaviour of PUT calls"""
@@ -93,7 +132,7 @@ class LM_ApiServer(RequestHandler):
     def post(self, id):
         """Handles the behaviour of POST calls"""
         self.write(json.loads(self.request.body))
-        json_form = json.loads(self.request.body)
+        #json_form = json.loads(self.request.body)
   
     def put(self, id):
         """Handles the behaviour of PUT calls"""
@@ -117,7 +156,7 @@ class LM_ApiServer(RequestHandler):
 def make_app():
   urls = [
     (r"/api/item/from_local_mgr_api/([^/]+)?", LM_ApiServer),
-    (r"/api/item/from_car_api/([^/]+)?", Car_ApiServer)
+    (r"/api/item/from_car_api/qtcode/([^/]+)?", Car_ApiServer)
   ]
   return Application(urls, debug=True)
 #############################################################################################
@@ -139,10 +178,11 @@ def post_local_mgr_config():
     http_client = tornado.httpclient.HTTPClient()
     while True:
       try:
-        response_1 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_ONE'],method='POST',body=json.dumps(body["MECs"][0]))
-        #response_2 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_TWO'],method='POST',body=json.dumps(body["MECs"][1]))        
+        response_1 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_ONE'],method='POST'\
+                                       ,body=json.dumps(body["lms"]["lm_id1"]))
+        #response_2 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_TWO'],method='POST',body=json.dumps(body["lms"]["lm_id2"]))        
       except Exception as e:
-        general_log.debug("Errorasdasd: %s" % e)
+        general_log.debug("Error: %s" % e)
         time.sleep(5)
       else:
         general_log.debug(response_1.body)

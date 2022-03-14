@@ -1,0 +1,139 @@
+{
+	"id": "Main manager 1",
+	"url": "localhost:4000",
+	"mms": {},
+	"lms": {
+		"lm_id1": {
+			"id": "lm_id1",
+			"ref_amqpep": "localhost:30072",
+			"ref_mmep": "localhost:4000",
+			"local_config": [{
+					"qtcode_list": [
+						"A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4"
+					],
+					"message": {
+						"id": "sm1",
+						"endpoints": [{
+							"priority": "1",
+							"netop": "tim",
+							"mmep": "localhost:4000",
+							"amqpep": "localhost:30072"
+
+						}]
+					}
+				},
+				{
+					"qtcode_list": [
+						"A5", "A6", "B5", "B6"
+					],
+					"message": {
+						"id": "sm2",
+						"endpoints": [{
+								"priority": "1",
+								"netop": "tim",
+								"mmep": "localhost:4000",
+								"amqpep": "localhost:30072"
+
+							},
+							{
+								"priority": "2",
+								"netop": "magenta",
+								"mmep": "localhost:4000",
+								"amqpep": "localhost:30172"
+							}
+						]
+					}
+				},
+				{
+					"qtcode_list": [
+						"A7", "A8", "B7", "B8"
+					],
+					"message": {
+						"id": "sm3",
+						"endpoints": [{
+								"priority": "1",
+								"netop": "magenta",
+								"mmep": "localhost:4000",
+								"amqpep": "localhost:30172"
+
+							},
+							{
+								"priority": "2",
+								"netop": "tim",
+								"mmep": "localhost:4000",
+								"amqpep": "localhost:30072"
+							}
+						]
+					}
+				}
+			]
+		},
+		"lm_id2": {
+			"id": "lm_id2",
+			"ref_amqpep": "localhost:30072",
+			"ref_mmep": "localhost:4000",
+			"local_config": [{
+					"qtcode_list": [
+						"C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"
+					],
+					"message": {
+						"id": "sm4",
+						"endpoints": [{
+							"priority": "1",
+							"netop": "tim",
+							"mmep": "localhost:4000",
+							"amqpep": "localhost:30072"
+
+						}]
+					}
+				},
+				{
+					"qtcode_list": [
+						"C5", "C6", "D5", "D6"
+					],
+					"message": {
+						"id": "sm5",
+						"endpoints": [{
+								"priority": "1",
+								"netop": "tim",
+								"mmep": "localhost:4000",
+								"amqpep": "localhost:30072"
+
+							},
+							{
+								"priority": "2",
+								"netop": "magenta",
+								"mmep": "localhost:4000",
+								"amqpep": "localhost:30172"
+							}
+						]
+					}
+				},
+				{
+					"qtcode_list": [
+						"C7", "C8", "D7", "D8"
+					],
+					"message": {
+						"id": "sm6",
+						"endpoints": [{
+								"priority": "1",
+								"netop": "magenta",
+								"mmep": "localhost:4000",
+								"amqpep": "localhost:30172"
+
+							},
+							{
+								"priority": "2",
+								"netop": "tim",
+								"mmep": "localhost:4000",
+								"amqpep": "localhost:30072"
+							}
+						]
+					}
+				}
+			]
+		}
+
+	}
+
+}
