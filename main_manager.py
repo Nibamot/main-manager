@@ -173,9 +173,11 @@ def make_app():
 
 def post_local_mgr_config():
     """ Method to send the local manager its configs """
-    config = open('local_manager_config.json')
+    config = open('support_message_config.json')
     body = json.load(config)
     http_client = tornado.httpclient.HTTPClient()
+    sm_dict,qtcode_dict = config_startup()
+
     while True:
       try:
         response_1 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_ONE'],method='POST'\
