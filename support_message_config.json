@@ -5,7 +5,7 @@
 	"lms": {
 		"lm_id1": {
 			"id": "lm_id1",
-			"ref_amqpep": "localhost:30072",
+			"ref_amqpep": "80.159.227.2:5672",
 			"ref_mmep": "localhost:4000",
 			"local_config": [{
 					"qtcode_list": [
@@ -17,7 +17,7 @@
 							"priority": "1",
 							"netop": "tim",
 							"mmep": "localhost:4000",
-							"amqpep": "localhost:30072"
+							"amqpep": "80.159.227.2:5672"
 
 						}]
 					}
@@ -32,7 +32,7 @@
 								"priority": "1",
 								"netop": "tim",
 								"mmep": "localhost:4000",
-								"amqpep": "localhost:30072"
+								"amqpep": "80.159.227.2:5672"
 
 							},
 							{
@@ -61,7 +61,7 @@
 								"priority": "2",
 								"netop": "tim",
 								"mmep": "localhost:4000",
-								"amqpep": "localhost:30072"
+								"amqpep": "80.159.227.2:5672"
 							}
 						]
 					}
