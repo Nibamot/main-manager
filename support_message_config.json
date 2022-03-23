@@ -1,12 +1,12 @@
 {
 	"id": "Main manager 1",
-	"url": "localhost:4000",
+	"url": "main-manager-service:32400",
 	"mms": {},
 	"lms": {
 		"lm_id1": {
 			"id": "lm_id1",
 			"ref_amqpep": "80.159.227.2:5672",
-			"ref_mmep": "localhost:4000",
+			"ref_mmep": "main-manager-service:32400",
 			"local_config": [{
 					"qtcode_list": [
 						"A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4"
@@ -16,7 +16,7 @@
 						"endpoints": [{
 							"priority": "1",
 							"netop": "tim",
-							"mmep": "localhost:4000",
+							"mmep": "main-manager-service:32400",
 							"amqpep": "80.159.227.2:5672"
 
 						}]
@@ -31,14 +31,14 @@
 						"endpoints": [{
 								"priority": "1",
 								"netop": "tim",
-								"mmep": "localhost:4000",
+								"mmep": "main-manager-service:32400",
 								"amqpep": "80.159.227.2:5672"
 
 							},
 							{
 								"priority": "2",
 								"netop": "magenta",
-								"mmep": "localhost:4000",
+								"mmep": "main-manager-service:32400",
 								"amqpep": "localhost:30172"
 							}
 						]
@@ -53,15 +53,37 @@
 						"endpoints": [{
 								"priority": "1",
 								"netop": "magenta",
-								"mmep": "localhost:4000",
+								"mmep": "main-manager-service:32400",
 								"amqpep": "localhost:30172"
 
 							},
 							{
 								"priority": "2",
 								"netop": "tim",
-								"mmep": "localhost:4000",
+								"mmep": "main-manager-service:32400",
 								"amqpep": "80.159.227.2:5672"
+							}
+						]
+					}
+				},
+				{
+					"qtcode_list": [
+						
+					],
+					"message": {
+						"id": "sm_def",
+						"endpoints": [{
+								"priority": "1",
+								"netop": "magenta",
+								"mmep": "main-manager-service:32400",
+								"amqpep": ""
+
+							},
+							{
+								"priority": "1",
+								"netop": "tim",
+								"mmep": "main-manager-two-service:32400",
+								"amqpep": ""
 							}
 						]
 					}
@@ -71,7 +93,7 @@
 		"lm_id2": {
 			"id": "lm_id2",
 			"ref_amqpep": "localhost:30072",
-			"ref_mmep": "localhost:4000",
+			"ref_mmep": "main-manager-service:32400",
 			"local_config": [{
 					"qtcode_list": [
 						"C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"
@@ -81,7 +103,7 @@
 						"endpoints": [{
 							"priority": "1",
 							"netop": "tim",
-							"mmep": "localhost:4000",
+							"mmep": "main-manager-service:32400",
 							"amqpep": "localhost:30072"
 
 						}]
@@ -96,14 +118,14 @@
 						"endpoints": [{
 								"priority": "1",
 								"netop": "tim",
-								"mmep": "localhost:4000",
+								"mmep": "main-manager-service:32400",
 								"amqpep": "localhost:30072"
 
 							},
 							{
 								"priority": "2",
 								"netop": "magenta",
-								"mmep": "localhost:4000",
+								"mmep": "main-manager-service:32400",
 								"amqpep": "localhost:30172"
 							}
 						]
@@ -118,15 +140,37 @@
 						"endpoints": [{
 								"priority": "1",
 								"netop": "magenta",
-								"mmep": "localhost:4000",
+								"mmep": "main-manager-service:32400",
 								"amqpep": "localhost:30172"
 
 							},
 							{
 								"priority": "2",
 								"netop": "tim",
-								"mmep": "localhost:4000",
+								"mmep": "main-manager-service:32400",
 								"amqpep": "localhost:30072"
+							}
+						]
+					}
+				},
+				{
+					"qtcode_list": [
+						
+					],
+					"message": {
+						"id": "sm_def",
+						"endpoints": [{
+								"priority": "1",
+								"netop": "magenta",
+								"mmep": "main-manager-service:32400",
+								"amqpep": ""
+
+							},
+							{
+								"priority": "1",
+								"netop": "tim",
+								"mmep": "main-manager-two-service:32400",
+								"amqpep": ""
 							}
 						]
 					}

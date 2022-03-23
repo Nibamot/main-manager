@@ -1,8 +1,8 @@
 import os
 import json
 import time
-import urllib
 import logging
+from py import test
 import tornado.httpclient
 from tornado.web import Application, RequestHandler
 from tornado.ioloop import IOLoop
@@ -53,19 +53,21 @@ time_log = logger_setup(' Timing Main Manager  ')
 
 sm_dict={}
 qtcode_dict={}
+test_config={}
 
-def config_startup():
+def config_startup(cfg):
     """ Main Manager startup config handling"""
-    config = open(os.environ['LM_CONFIG_JSON'])#'support_message_config.json',encoding="utf8"
-    body = json.load(config)
+    body = json.load(cfg)
     
-    for key,value in body["lms"].items(): 
-        for lc in value["local_config"]:
-            for qt in lc["qtcode_list"]:
-                qtcode_dict.update({qt:lc["message"].get("id")})
-                sm_dict.update({lc["message"].get("id"):lc["message"].get("endpoints")})
-    
-    return sm_dict, qtcode_dict
+    if body!={}:
+        for key,value in body["lms"].items(): 
+            for lc in value["local_config"]:
+                for qt in lc["qtcode_list"]:
+                    qtcode_dict.update({qt:lc["message"].get("id")})
+                    sm_dict.update({lc["message"].get("id"):lc["message"].get("endpoints")})
+        return sm_dict, qtcode_dict
+    else:
+        return sm_dict, qtcode_dict
 
 ############TENTATIVE DICTS from MM Config###################
 
@@ -91,9 +93,9 @@ class Car_ApiServer(RequestHandler):
     def get(self,id):
         """ GET calls handler"""
         received_post = time.time()
-        sm_dict,qtcode_dict=config_startup()
+        sm_dict,qtcode_dict=config_startup(test_config)
         car_position = self.request.uri.replace("/api/item/from_car_api/qtcode/","")
-        if car_position in qtcode_dict.keys():
+        if car_position in qtcode_dict.keys() and test_config!={}:
             for sm in sm_dict[qtcode_dict.get((car_position))]:
                 self.set_status(200)
                 self.set_header("Content-Type", 'application/json')
@@ -124,30 +126,27 @@ class Car_ApiServer(RequestHandler):
 
 class LM_ApiServer(RequestHandler):
     """ clear
-    API SERVER for handling calls from the local Manager (TBD) """
+    API SERVER to update the main manager and local manager configs """
     def prepare():
         """ To call some method before the execution of POST/GET/DELETE..."""
         pass
 
-    def post(self, id):
+    async def post(self, id):
         """Handles the behaviour of POST calls"""
-        self.write(json.loads(self.request.body))
-        #json_form = json.loads(self.request.body)
+        self.write("Thank you for configuring me!")
+        global test_config
+        test_config = json.loads(self.request.body)
+        await post_local_mgr_config(test_config)
+        sm_dict,qtcode_dict=config_startup(test_config)
   
     def put(self, id):
         """Handles the behaviour of PUT calls"""
-        global items
-        new_items = [item for item in items if item['id'] is not int(id)]
-        items = new_items
-        self.write({'message': 'Item with id %s was updated' % id})
+        pass
 
 
     def delete(self, id):
         """Handles the behaviour of DELETE calls"""
-        global items
-        new_items = [item for item in items if item['id'] is not int(id)]
-        items = new_items
-        self.write({'message': 'Item with id %s was deleted' % id})
+        pass
     
     def on_finish():
         pass
@@ -171,25 +170,21 @@ def make_app():
     ################################ API CLients #################################
 #############################################################################################
 
-def post_local_mgr_config():
+async def post_local_mgr_config(cfg):
     """ Method to send the local manager its configs """
-    config = open('support_message_config.json')
-    body = json.load(config)
-    http_client = tornado.httpclient.HTTPClient()
-    sm_dict,qtcode_dict = config_startup()
+    http_client = tornado.httpclient.AsyncHTTPClient()
 
     while True:
       try:
         response_1 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_ONE'],method='POST'\
-                                       ,body=json.dumps(body["lms"]["lm_id1"]))
-        #response_2 = http_client.fetch(os.environ['LOCAL_MANAGER_POST_ADDRESS_TWO'],method='POST',body=json.dumps(body["lms"]["lm_id2"]))        
+                                       ,body=json.dumps(cfg["lms"]["lm_id1"]))
       except Exception as e:
         general_log.debug("Error: %s" % e)
         time.sleep(5)
       else:
         general_log.debug(response_1.body)
         break
-        #general_log.debug(response_2.body)
+
 
 def car_registration():# NOT USED
     """ Method to let the local manager know about the car registration """
@@ -212,6 +207,5 @@ if __name__ == '__main__':
 
   app = make_app()
   app.listen(os.environ['API_PORT'])
-  post_local_mgr_config()
   print("Started Main Manager REST Server")
   IOLoop.instance().start()
