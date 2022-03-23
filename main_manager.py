@@ -56,7 +56,7 @@ test_config={}
 
 def config_startup(cfg):
     """ Main Manager startup config handling"""
-    body = json.load(cfg)
+    body = cfg 
     
     if body!={}:
         for key,value in body["lms"].items(): 
