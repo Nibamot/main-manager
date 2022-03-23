@@ -126,7 +126,7 @@ class Car_ApiServer(RequestHandler):
 class LM_ApiServer(RequestHandler):
     """ clear
     API SERVER to update the main manager and local manager configs """
-    def prepare():
+    def prepare(self):
         """ To call some method before the execution of POST/GET/DELETE..."""
         pass
 
@@ -147,7 +147,7 @@ class LM_ApiServer(RequestHandler):
         """Handles the behaviour of DELETE calls"""
         pass
     
-    def on_finish():
+    def on_finish(self):
         pass
 
 
