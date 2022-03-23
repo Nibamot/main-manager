@@ -2,7 +2,6 @@ import os
 import json
 import time
 import logging
-from py import test
 import tornado.httpclient
 from tornado.web import Application, RequestHandler
 from tornado.ioloop import IOLoop
