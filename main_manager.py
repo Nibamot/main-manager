@@ -153,7 +153,7 @@ class LM_ApiServer(RequestHandler):
 
 def make_app():
   urls = [
-    (r"/api/item/from_local_mgr_api/([^/]+)?", LM_ApiServer),
+    (r"/api/item/configure_me/([^/]+)?", LM_ApiServer),
     (r"/api/item/from_car_api/qtcode/([^/]+)?", Car_ApiServer)
   ]
   return Application(urls, debug=True)
