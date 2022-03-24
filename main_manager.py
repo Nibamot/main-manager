@@ -181,7 +181,7 @@ async def post_local_mgr_config(cfg):
         general_log.debug("Error: %s" % e)
         time.sleep(5)
       else:
-        general_log.debug(response_1)
+        #general_log.debug(response_1)
         break
 
 
